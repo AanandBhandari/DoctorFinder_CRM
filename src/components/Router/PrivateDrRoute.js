@@ -5,15 +5,15 @@ import { Route, Redirect } from "react-router-dom";
 
 const PrivateDrRoute = ({
   component: Component,
-  auth: { isAuthenticated, loading, isHosManager, isDr },
+  auth: { isAuthenticated, loading, type },
   ...rest
 }) => (
   <Route
     {...rest}
     render={props => {
-      if (!isAuthenticated && !loading && !isHosManager && !isDr) {
+      if (!isAuthenticated && !loading && type!=='doctor') {
         return <Redirect to="/login-dr" />;
-      } else if (isAuthenticated && !loading && isHosManager) {
+      } else if (isAuthenticated && !loading && type==='hospital') {
         return <Redirect to="/hospital-dashboard" />;
       } else {
         return <Component {...props} />;

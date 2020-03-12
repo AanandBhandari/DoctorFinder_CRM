@@ -22,7 +22,7 @@ export const loadMe = () => async dispatch => {
     dispatch({
       type: LOADED_MYSELF,
       payload:res.data,
-      role      
+      role:type      
     });
   } catch (err) {
     dispatch({

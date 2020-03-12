@@ -10,8 +10,9 @@ const initalState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-  isDr: null,
-  isHosManager: null
+//   isDr: null,
+//   isHosManager: null
+    type:''
 };
 
 export default function(state = initalState, action) {
@@ -23,7 +24,7 @@ export default function(state = initalState, action) {
         isAuthenticated: true,
         loading: false,
         user: payload,
-        ...role
+        type:role
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
@@ -42,8 +43,9 @@ export default function(state = initalState, action) {
         loading: false,
         user: null,
         token: null,
-        isDr: null,
-        isHosManager: null
+        // isDr: null,
+        // isHosManager: null
+        type:role
       };
 
     default:

@@ -5,16 +5,16 @@ import { Route, Redirect } from "react-router-dom";
 
 const PrivateHosRoute = ({
   component: Component,
-  auth: { isAuthenticated, loading, isHosManager, isDr },
+  auth: { isAuthenticated, loading, type },
   ...rest
 }) => {
   return (
     <Route
       {...rest}
       render={props => {
-        if (!isAuthenticated && !loading && !isHosManager && !isDr) {
+        if (!isAuthenticated && !loading && type!=='hospital') {
           return (<Redirect to="/login-hos" />)
-        } else if (isAuthenticated && !loading && isDr) {
+        } else if (isAuthenticated && !loading && type==='doctor') {
           return (<Redirect to="/doctor-dashboard" />)
         } else {
           return (<Component {...props} />)
