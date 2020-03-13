@@ -2,7 +2,8 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   AUTH_ERROR,
-  LOADED_MYSELF
+  LOADED_MYSELF,
+  LOGOUT
 } from "../actions/types";
 
 const initalState = {
@@ -10,8 +11,6 @@ const initalState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-//   isDr: null,
-//   isHosManager: null
     type:''
 };
 
@@ -36,6 +35,7 @@ export default function(state = initalState, action) {
       };
     case LOGIN_FAIL:
     case AUTH_ERROR:
+    case LOGOUT:
       localStorage.removeItem("token");
       return {
         ...state,
@@ -43,8 +43,6 @@ export default function(state = initalState, action) {
         loading: false,
         user: null,
         token: null,
-        // isDr: null,
-        // isHosManager: null
         type:role
       };
 

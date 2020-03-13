@@ -18,6 +18,7 @@ const Login = ({ login, type, isAuthenticated }) => {
   };
   if(isAuthenticated) return <Redirect to={`/${type}-dashboard`} />
   return (
+    <div className="container">
         <div className="card card-login mx-auto mt-5">
           <div className="card-header">Login {type}</div>
           <div className="card-body">
@@ -85,6 +86,7 @@ const Login = ({ login, type, isAuthenticated }) => {
             </div>
           </div>
         </div>
+    </div>
   );
 };
 

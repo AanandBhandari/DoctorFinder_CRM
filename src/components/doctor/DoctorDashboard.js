@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Layout from '../layout/Layout'
 
 const DoctorDashboard = props => {
     return (
-        <div>
-            helloworld dr
-        </div>
+        <Layout>
+           Hello from DoctorDashboard
+        </Layout>
     )
 }
 

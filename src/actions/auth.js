@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL,LOADED_MYSELF,AUTH_ERROR } from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL,LOADED_MYSELF,AUTH_ERROR,LOGOUT} from "./types";
 import axios from "axios";
 import { setAlert } from "../actions/alert";
 import jwt from "jsonwebtoken";
@@ -15,10 +15,6 @@ export const loadMe = () => async dispatch => {
     const decoded = jwt.verify(token, JWT_SIGNIN_KEY);
     const { _id, type } = decoded;
     const res = await axios.get(`/${type}/profile/${_id}`);
-    const role = {
-      isDr:type==='doctor'? true:false,
-      isHosManager:type==='hospital'?true:false
-    }
     dispatch({
       type: LOADED_MYSELF,
       payload:res.data,
@@ -63,3 +59,6 @@ export const login = ({ email, password, type }) => async dispatch => {
     });
   }
 };
+export const logout = ()=> dispatch => {
+  dispatch({type: LOGOUT})
+}

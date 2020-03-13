@@ -22,7 +22,6 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="container">
           <Alert />
           <Switch>
             <Route exact path="/register-dr" render={(props)=> <Register {...props} type='doctor'/>} />
@@ -32,7 +31,6 @@ function App() {
             <PrivateDrRoute exact path="/doctor-dashboard" component={DoctorDashboard}/>
             <PrivateHosRoute exact path="/hospital-dashboard" component={HospitalDashboard}/>
           </Switch>
-        </div>
       </Router>
     </Provider>
   );

@@ -26,6 +26,7 @@ const Register = ({setAlert,type, isAuthenticated, register}) => {
     return <Redirect to={`/${type}-dashboard`} />
   }
   return (
+    <div className="container">
     <div className="card card-register mx-auto mt-5">
       <div className="card-header">Register {type} Account</div>
       <div className="card-body">
@@ -128,6 +129,7 @@ const Register = ({setAlert,type, isAuthenticated, register}) => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };
