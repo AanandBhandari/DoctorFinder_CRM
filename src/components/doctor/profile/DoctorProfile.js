@@ -4,9 +4,9 @@ import Layout from '../../layout/Layout'
 import Loader from '../../layout/Loader'
 import { connect } from 'react-redux'
 import { loadMe } from '../../../actions/auth'
-import { ProfileForm } from './ProfileForm'
+import ProfileForm  from './ProfileForm'
 
-const DoctorProfile = ({loadMe, auth:{user,loading}}) => {
+const DoctorProfile = ({loadMe,auth:{user,loading}}) => {
     useEffect(() => {
         loadMe()
     }, [loadMe])

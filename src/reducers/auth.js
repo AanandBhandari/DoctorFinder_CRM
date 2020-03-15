@@ -5,7 +5,8 @@ import {
   LOADED_MYSELF,
   TOGGLE_DR_AVAILABLE,
   TOGGLE_DR_AVAILABLE_FAIL,
-  LOGOUT
+  LOGOUT,
+  GET_RANKING
 } from "../actions/types";
 
 const initalState = {
@@ -35,11 +36,22 @@ export default function(state = initalState, action) {
         isAuthenticated: true,
         loading: false
       };
+      // --only for doctor--
     case TOGGLE_DR_AVAILABLE:
       return{
         ...state,
-        uesr:{...state.user,isAvailable:payload}
+        user:{...state.user,isAvailable:payload}
       };
+    case TOGGLE_DR_AVAILABLE_FAIL:
+      return {
+        ...state,
+        user: { ...state.user }
+      };
+    case GET_RANKING:
+      return {
+        ...state,
+        ranking: payload
+      }
     case LOGIN_FAIL:
     case AUTH_ERROR:
     case LOGOUT:

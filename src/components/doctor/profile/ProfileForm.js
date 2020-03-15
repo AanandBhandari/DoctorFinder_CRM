@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { SERVER_ROUTE } from '../../../utils/config'
 import { Link } from 'react-router-dom'
-export const ProfileForm = ({ user: { isAvailable, _id, name, lastname, email, image, professionaltitle, specialities, workexp, edu } }) => {
+import { toggleAvailability, averageRanking} from '../../../actions/doctor/profile'
+import {connect} from 'react-redux'
+import PropTypes from "prop-types";
+const ProfileForm = ({ toggleAvailability, averageRanking,ranking ,user: { isAvailable, _id, name, lastname, email, image, professionaltitle, specialities, workexp, edu } }) => {
     const[available,setAvailable]=useState(isAvailable)
     const toggleAvailable = () => {
         setAvailable(!available)
+        toggleAvailability(_id)
     }
+    useEffect(()=>{averageRanking(_id)},[averageRanking,_id])
     return (
         <form className="container emp-profile" method="post">
             <div className="row">
@@ -26,7 +31,7 @@ export const ProfileForm = ({ user: { isAvailable, _id, name, lastname, email, i
                         <h6>
                             {professionaltitle}
                         </h6>
-                        <p className="proile-rating">RANKINGS : <span>8/10</span></p>
+                        <p className="proile-rating">RANKINGS : <span>{ranking}/5</span></p>
                         <p className="proile-rating">FLIP AVAILABILITY : <span ><label className="switch">
                             <input type="checkbox"  onClick={toggleAvailable} defaultChecked={available}/>
                             <span className="slider round"></span>
@@ -152,3 +157,12 @@ export const ProfileForm = ({ user: { isAvailable, _id, name, lastname, email, i
         </form>
     )
 }
+
+ProfileForm.propTypes = {
+    toggleAvailability: PropTypes.func.isRequired,
+    ranking:PropTypes.number,
+};
+const mapStateToProps = state => ({
+    ranking:state.auth.ranking
+})
+export default connect(mapStateToProps, { toggleAvailability, averageRanking})(ProfileForm);
