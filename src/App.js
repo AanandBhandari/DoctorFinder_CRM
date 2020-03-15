@@ -6,12 +6,13 @@ import Alert from './components/layout/Alert'
 import setAuthToken from './utils/setAuthToken'
 import {loadMe} from './actions/auth'
 import DoctorDashboard from './components/doctor/DoctorDashboard'
+import DoctorProfile from './components/doctor/profile/DoctorProfile'
 import HospitalDashboard from "./components/hospital/HospitalDashboard";
 import PrivateDrRoute from './components/Router/PrivateDrRoute'
 import PrivateHosRoute from './components/Router/PrivateHosRoute'
 // redux
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./utils/store";
 if (localStorage.token) {
   setAuthToken(localStorage.token)
 }
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/login-dr" render={(props)=> <Login {...props} type='doctor'/>} />
             <Route exact path="/login-hos" render={(props)=> <Login {...props} type='hospital'/>} />
             <PrivateDrRoute exact path="/doctor-dashboard" component={DoctorDashboard}/>
+            <PrivateDrRoute exact path="/doctor-profile" component={DoctorProfile}/>
             <PrivateHosRoute exact path="/hospital-dashboard" component={HospitalDashboard}/>
           </Switch>
       </Router>

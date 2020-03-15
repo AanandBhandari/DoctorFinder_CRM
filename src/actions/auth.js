@@ -1,8 +1,8 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL,LOADED_MYSELF,AUTH_ERROR,LOGOUT} from "./types";
 import axios from "axios";
-import { setAlert } from "../actions/alert";
+import { setAlert } from "./alert";
 import jwt from "jsonwebtoken";
-import { JWT_SIGNIN_KEY } from "../config";
+import { JWT_SIGNIN_KEY } from "../utils/config";
 const config = {
   headers: {
     "Content-Type": "application/json"

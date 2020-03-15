@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import HosBar from "./navbar/HosBar";
 import DrBar from "./navbar/DrBar";
 import Footer from "./Footer";
@@ -17,7 +16,4 @@ const Layout = ({ children, type }) => {
         </Fragment>
     );
 };
-
-Layout.propTypes = {};
-
 export default Layout;

@@ -3,6 +3,8 @@ import {
   LOGIN_SUCCESS,
   AUTH_ERROR,
   LOADED_MYSELF,
+  TOGGLE_DR_AVAILABLE,
+  TOGGLE_DR_AVAILABLE_FAIL,
   LOGOUT
 } from "../actions/types";
 
@@ -11,7 +13,7 @@ const initalState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-    type:''
+  type:''
 };
 
 export default function(state = initalState, action) {
@@ -32,6 +34,11 @@ export default function(state = initalState, action) {
         ...payload,
         isAuthenticated: true,
         loading: false
+      };
+    case TOGGLE_DR_AVAILABLE:
+      return{
+        ...state,
+        uesr:{...state.user,isAvailable:payload}
       };
     case LOGIN_FAIL:
     case AUTH_ERROR:
