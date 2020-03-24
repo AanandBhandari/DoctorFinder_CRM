@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL,LOADED_MYSELF,AUTH_ERROR,LOGOUT} from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL,LOADED_MYSELF,AUTH_ERROR,LOGOUT, CLEAR_DR_PROFILE} from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
 import jwt from "jsonwebtoken";
@@ -61,4 +61,5 @@ export const login = ({ email, password, type }) => async dispatch => {
 };
 export const logout = ()=> dispatch => {
   dispatch({type: LOGOUT})
+  dispatch({type:CLEAR_DR_PROFILE})
 }

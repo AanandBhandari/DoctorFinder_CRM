@@ -37,21 +37,16 @@ export default function(state = initalState, action) {
         loading: false
       };
       // --only for doctor--
-    case TOGGLE_DR_AVAILABLE:
-      return{
-        ...state,
-        user:{...state.user,isAvailable:payload}
-      };
-    case TOGGLE_DR_AVAILABLE_FAIL:
-      return {
-        ...state,
-        user: { ...state.user }
-      };
-    case GET_RANKING:
-      return {
-        ...state,
-        ranking: payload
-      }
+    // case TOGGLE_DR_AVAILABLE:
+    //   return{
+    //     ...state,
+    //     user:{...state.user,isAvailable:payload}
+    //   };
+    // case GET_RANKING:
+    //   return {
+    //     ...state,
+    //     ranking: {...payload}
+    //   }
     case LOGIN_FAIL:
     case AUTH_ERROR:
     case LOGOUT:

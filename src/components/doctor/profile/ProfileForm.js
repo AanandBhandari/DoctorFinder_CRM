@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { toggleAvailability, averageRanking} from '../../../actions/doctor/profile'
 import {connect} from 'react-redux'
 import PropTypes from "prop-types";
-const ProfileForm = ({ toggleAvailability, averageRanking,ranking ,user: { isAvailable, _id, name, lastname, email, image, professionaltitle, specialities, workexp, edu } }) => {
+const ProfileForm = ({ toggleAvailability, averageRanking, averageStar,fiveStars,threeStars,fourStars,twoStars,oneStars ,user: { isAvailable, _id, name, lastname, email, image, professionaltitle, specialities, workexp, edu } }) => {
     const[available,setAvailable]=useState(isAvailable)
     const toggleAvailable = () => {
         setAvailable(!available)
@@ -31,7 +31,7 @@ const ProfileForm = ({ toggleAvailability, averageRanking,ranking ,user: { isAva
                         <h6>
                             {professionaltitle}
                         </h6>
-                        <p className="proile-rating">RANKINGS : <span>{ranking}/5</span></p>
+                        <p className="proile-rating">RANKINGS : <span>{averageStar}/5</span></p>
                         <p className="proile-rating">FLIP AVAILABILITY : <span ><label className="switch">
                             <input type="checkbox"  onClick={toggleAvailable} defaultChecked={available}/>
                             <span className="slider round"></span>
@@ -41,7 +41,7 @@ const ProfileForm = ({ toggleAvailability, averageRanking,ranking ,user: { isAva
                                 <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">User Rating</a>
                             </li>
                         </ul>
                     </div>
@@ -106,48 +106,42 @@ const ProfileForm = ({ toggleAvailability, averageRanking,ranking ,user: { isAva
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <label>Experience</label>
+                                    <label>Five Stars</label>
                                 </div>
                                 <div className="col-md-6">
-                                    <p>Expert</p>
+                                    <p>{fiveStars}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <label>Hourly Rate</label>
+                                    <label>Four Stars</label>
                                 </div>
                                 <div className="col-md-6">
-                                    <p>10$/hr</p>
+                                    <p>{fourStars}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <label>Total Projects</label>
+                                    <label>Three Stars</label>
                                 </div>
                                 <div className="col-md-6">
-                                    <p>230</p>
+                                    <p>{threeStars}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <label>English Level</label>
+                                    <label>Two Stars</label>
                                 </div>
                                 <div className="col-md-6">
-                                    <p>Expert</p>
+                                    <p>{twoStars}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <label>Availability</label>
+                                    <label>One Stars</label>
                                 </div>
                                 <div className="col-md-6">
-                                    <p>6 months</p>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <label>Your Bio</label><br />
-                                    <p>Your detail description</p>
+                                    <p>{oneStars}</p>
                                 </div>
                             </div>
                         </div>
@@ -159,10 +153,9 @@ const ProfileForm = ({ toggleAvailability, averageRanking,ranking ,user: { isAva
 }
 
 ProfileForm.propTypes = {
-    toggleAvailability: PropTypes.func.isRequired,
-    ranking:PropTypes.number,
+    toggleAvailability: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    ranking:state.auth.ranking
+    ...state.auth.ranking
 })
 export default connect(mapStateToProps, { toggleAvailability, averageRanking})(ProfileForm);

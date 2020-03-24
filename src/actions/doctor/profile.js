@@ -1,4 +1,4 @@
-import { TOGGLE_DR_AVAILABLE, TOGGLE_DR_AVAILABLE_FAIL, GET_RANKING } from "../types";
+import { TOGGLE_DR_AVAILABLE,GET_RANKING, GET_DR_PROFILE } from "../types";
 import axios from "axios";
 import { setAlert } from "../alert";
 const config = {
@@ -6,6 +6,19 @@ const config = {
         "Content-Type": "application/json"
     }
 };
+
+export const getDrProfile = _id => async dispatch => {
+    try {
+        const res = await axios.get(`/doctor/profile/${_id}`);
+        dispatch({
+            type: GET_DR_PROFILE,
+            payload:res.data
+        })
+    } catch (err) {
+        // need to handle different error code..everywhere :)
+    }
+}
+
 // toggle doctor available
 export const toggleAvailability = _id => async dispatch => {
     try {
@@ -15,25 +28,24 @@ export const toggleAvailability = _id => async dispatch => {
             payload: res.data
         });
     } catch (err) {
-        console.log(err.response,'toggle error');
-        dispatch({
-            type: TOGGLE_DR_AVAILABLE_FAIL
-        });
+        console.log(err.response,'toggle error')
         dispatch(setAlert(err.response.data.error, "danger"));
     }
 };
 
 export const averageRanking = _id => async dispatch => {
     try {
-        const res = await axios.get(`/getAverageRating/?d_id=${_id}`)
-        const data = res.data.averageStar === null ? 0 : Number.parseFloat(res.data.averageStar).toFixed(2);
+        const res = await axios.get(`/getAverageRating/?d_id=5de00009ef014432f080427b`)
+        res.data.averageStar === null ?
+            res.data.averageStar = 0 : res.data.averageStar=Number.parseFloat(res.data.averageStar).toFixed(2);
+            const data = res.data
         dispatch({
             type:GET_RANKING,
             payload: data
         })
 
     } catch (err) {
-        console.log(err.response,'ranking error');
-        dispatch(setAlert(err.response.statusText, "danger"));
+        console.log(err,'ranking error');
+        // dispatch(setAlert(err.response.statusText, "danger"));
     }
 }
