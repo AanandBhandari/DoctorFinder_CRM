@@ -2,11 +2,8 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   AUTH_ERROR,
-  LOADED_MYSELF,
-  TOGGLE_DR_AVAILABLE,
-  TOGGLE_DR_AVAILABLE_FAIL,
-  LOGOUT,
-  GET_RANKING
+  DECODED_MYSELF,
+  LOGOUT
 } from "../actions/types";
 
 const initalState = {
@@ -20,7 +17,7 @@ const initalState = {
 export default function(state = initalState, action) {
   const { type, payload, role } = action;
   switch (type) {
-    case LOADED_MYSELF:
+    case DECODED_MYSELF:
       return {
         ...state,
         isAuthenticated: true,
@@ -36,17 +33,6 @@ export default function(state = initalState, action) {
         isAuthenticated: true,
         loading: false
       };
-      // --only for doctor--
-    // case TOGGLE_DR_AVAILABLE:
-    //   return{
-    //     ...state,
-    //     user:{...state.user,isAvailable:payload}
-    //   };
-    // case GET_RANKING:
-    //   return {
-    //     ...state,
-    //     ranking: {...payload}
-    //   }
     case LOGIN_FAIL:
     case AUTH_ERROR:
     case LOGOUT:

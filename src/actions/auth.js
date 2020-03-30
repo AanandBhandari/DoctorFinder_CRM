@@ -1,8 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL,LOADED_MYSELF,AUTH_ERROR,LOGOUT, CLEAR_DR_PROFILE} from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL,DECODED_MYSELF,AUTH_ERROR,LOGOUT, CLEAR_DR_PROFILE} from "./types";
 import axios from "axios";
 import { setAlert } from "./alert";
 import jwt from "jsonwebtoken";
 import { JWT_SIGNIN_KEY } from "../utils/config";
+import setAuthToken from '../utils/setAuthToken'
 const config = {
   headers: {
     "Content-Type": "application/json"
@@ -10,14 +11,17 @@ const config = {
 };
 // load my profile
 export const loadMe = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
   try {
     const token = localStorage.getItem("token");
     const decoded = jwt.verify(token, JWT_SIGNIN_KEY);
-    const { _id, type } = decoded;
-    const res = await axios.get(`/${type}/profile/${_id}`);
+    const { _id,name,email,type } = decoded;
+    const payload ={_id,name,email}
     dispatch({
-      type: LOADED_MYSELF,
-      payload:res.data,
+      type: DECODED_MYSELF,
+      payload,
       role:type      
     });
   } catch (err) {

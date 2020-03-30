@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { toggleAvailability, averageRanking} from '../../../actions/doctor/profile'
 import {connect} from 'react-redux'
 import PropTypes from "prop-types";
-const ProfileForm = ({ toggleAvailability, averageRanking, averageStar,fiveStars,threeStars,fourStars,twoStars,oneStars ,user: { isAvailable, _id, name, lastname, email, image, professionaltitle, specialities, workexp, edu } }) => {
+const ProfileForm = ({ toggleAvailability, averageRanking, averageStar, fiveStars, threeStars, fourStars, twoStars, oneStars,user: { isAvailable, _id, name, lastname, email, image, professionaltitle, specialities, workexp, edu } }) => {
     const[available,setAvailable]=useState(isAvailable)
     const toggleAvailable = () => {
         setAvailable(!available)
@@ -56,7 +56,7 @@ const ProfileForm = ({ toggleAvailability, averageRanking, averageStar,fiveStars
                         <p>WORKING EXPERIENCE</p>
                         {workexp.map((w, i) => <Link key={i} to="/workexperience">{w.title}<br/></Link>)}
                         <p>EDUCATION</p>
-                        {edu.map((e, i) =><Link key={i} to="/">{e.title}<br /></Link>)}
+                        {edu.map((e, i) =><Link key={i} to="/education">{e.title}<br /></Link>)}
                     </div>
                 </div>
                 <div className="col-md-8">
@@ -153,9 +153,10 @@ const ProfileForm = ({ toggleAvailability, averageRanking, averageStar,fiveStars
 }
 
 ProfileForm.propTypes = {
-    toggleAvailability: PropTypes.func.isRequired
+    toggleAvailability: PropTypes.func.isRequired,
+    averageRanking: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    ...state.auth.ranking
+    ...state.drprofile.ranking
 })
 export default connect(mapStateToProps, { toggleAvailability, averageRanking})(ProfileForm);

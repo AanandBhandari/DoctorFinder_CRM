@@ -2,7 +2,8 @@ import {
     TOGGLE_DR_AVAILABLE,
     GET_RANKING,
     GET_DR_PROFILE,
-    CLEAR_DR_PROFILE
+    CLEAR_DR_PROFILE,
+    CREATE_DR_PROFILE
 } from "../../actions/types";
 
 const initalState = {
@@ -14,6 +15,7 @@ const initalState = {
 export default function (state = initalState, action) {
     const { type, payload } = action;
     switch (type) {
+        case CREATE_DR_PROFILE:
         case GET_DR_PROFILE:
             return{
                 ...state,
