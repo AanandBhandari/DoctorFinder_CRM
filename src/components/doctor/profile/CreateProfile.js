@@ -21,7 +21,7 @@ const CreateProfile = ({createProfile}) => {
         const spcs=specialities.split(',').map(s => s.trim())
         const formData = new FormData()
         formData.append('image',image)
-        formData.append('specialities', spcs)
+        spcs.forEach(s => formData.append('specialities', s))
         formData.append('professionaltitle', professionaltitle)
         createProfile(formData)
     }

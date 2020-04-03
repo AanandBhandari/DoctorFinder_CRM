@@ -7,6 +7,7 @@ import setAuthToken from './utils/setAuthToken'
 import {loadMe} from './actions/auth'
 import DoctorDashboard from './components/doctor/DoctorDashboard'
 import DoctorProfile from './components/doctor/profile/DoctorProfile'
+import EditProfile from './components/doctor/profile/EditProfile'
 import HospitalDashboard from "./components/hospital/HospitalDashboard";
 import PrivateDrRoute from './components/Router/PrivateDrRoute'
 import PrivateHosRoute from './components/Router/PrivateHosRoute'
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/login-hos" render={(props)=> <Login {...props} type='hospital'/>} />
             <PrivateDrRoute exact path="/doctor-dashboard" component={DoctorDashboard}/>
             <PrivateDrRoute exact path="/doctor-profile" component={DoctorProfile}/>
+            <PrivateDrRoute exact path="/edit-dr-profile" component={EditProfile}/>
             <PrivateHosRoute exact path="/hospital-dashboard" component={HospitalDashboard}/>
           </Switch>
       </Router>

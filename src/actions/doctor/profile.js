@@ -1,4 +1,4 @@
-import { TOGGLE_DR_AVAILABLE, GET_RANKING, GET_DR_PROFILE, CLEAR_DR_PROFILE, AUTH_ERROR, CREATE_DR_PROFILE } from "../types";
+import { TOGGLE_DR_AVAILABLE, GET_RANKING, GET_DR_PROFILE, CLEAR_DR_PROFILE, AUTH_ERROR, UPDATE_DR_PROFILE, CREATE_DR_PROFILE } from "../types";
 import axios from "axios";
 import { setAlert } from "../alert";
 const config = {
@@ -67,8 +67,28 @@ export const createProfile = formData => async dispatch => {
             type:CREATE_DR_PROFILE,
             payload: res.data
         })
+        dispatch(setAlert('Profile created Sucessfully','success'))
     } catch (err) {
-        console.log(err.response, 'create dr profile error');
+        console.log(err.response, 'create doctor profile error');
+        errorHaldler(err, dispatch)
+    }
+}
+
+export const editProfile = (formData,_id, history) => async dispatch => {
+    try {
+        const res = await axios.put(`/doctor/profile/${_id}`, formData, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        dispatch({
+            type: UPDATE_DR_PROFILE,
+            payload: res.data
+        })
+        history.push('/doctor-profile')
+        dispatch(setAlert('Profile Updated Sucessfully', 'success'))
+    } catch (err) {
+        console.log(err.response, 'update doctor profile error');
         errorHaldler(err, dispatch)
     }
 }

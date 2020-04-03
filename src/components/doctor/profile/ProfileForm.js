@@ -14,7 +14,7 @@ const ProfileForm = ({ toggleAvailability, averageRanking, averageStar, fiveStar
     return (
         <form className="container emp-profile" method="post">
             <div className="row">
-                <div className="col-md-4">
+                <div className="col-md-4 ">
                     <div className="profile-img">
                         <img src={`${SERVER_ROUTE}/uploads/${image}`} alt={`${SERVER_ROUTE}/${image}`} />
                         <div className="file btn btn-lg btn-primary">
@@ -46,8 +46,9 @@ const ProfileForm = ({ toggleAvailability, averageRanking, averageStar, fiveStar
                         </ul>
                     </div>
                 </div>
-                <div className="col-md-2">
-                    <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+                <div className="col-md-2 ">
+                    <Link className="profile-edit-btn btn btn-secondary" to="/edit-dr-profile" >Edit Profile
+                    </Link>
                 </div>
             </div>
             <div className="row">
