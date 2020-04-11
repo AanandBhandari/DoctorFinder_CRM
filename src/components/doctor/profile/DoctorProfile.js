@@ -9,6 +9,7 @@ import CreateProfile from './CreateProfile'
 
 const DoctorProfile = ({getDrProfile,auth:{user}, drprofile:{profile,loading}}) => {
     useEffect(() => {
+        console.log('drprofile');
         user && getDrProfile(user._id)
     }, [getDrProfile,user])
     return (

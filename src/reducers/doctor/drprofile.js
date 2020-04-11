@@ -4,7 +4,15 @@ import {
     GET_DR_PROFILE,
     CLEAR_DR_PROFILE,
     CREATE_DR_PROFILE,
-    UPDATE_DR_PROFILE
+    UPDATE_DR_PROFILE,
+    ADD_WORKEXP,
+    DELETE_WORKEXP,
+    ADD_EDUCATION,
+    DELETE_EDUCATION,
+    DELETE_AWARD,
+    ADD_AWARD,
+    DELETE_TRAINING,
+    ADD_TRAINING
 } from "../../actions/types";
 
 const initalState = {
@@ -35,6 +43,30 @@ export default function (state = initalState, action) {
                 ...state,
                 ranking: payload,
                 loading: false
+            }
+        case DELETE_WORKEXP:
+        case ADD_WORKEXP:
+            return {
+                ...state,
+                profile:{...state.profile,workexp:payload}
+            }
+        case DELETE_EDUCATION:
+        case ADD_EDUCATION:
+            return {
+                ...state,
+                profile: { ...state.profile, edu: payload }
+            }
+        case DELETE_AWARD:
+        case ADD_AWARD:
+            return {
+                ...state,
+                profile: { ...state.profile, awards: payload }
+            }
+        case DELETE_TRAINING:
+        case ADD_TRAINING:
+            return {
+                ...state,
+                profile: { ...state.profile, training: payload }
             }
         case CLEAR_DR_PROFILE:
             return{

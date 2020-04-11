@@ -25,7 +25,7 @@ const DrBar = ({logout}) => {
           </Link>
         </li>
         <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Your Work & Experience">
-          <Link className="nav-link" to="/workexperience">
+          <Link className="nav-link" to="/work-exp">
             <i className="fa fa-fw fa-tasks"></i>
             <span className="nav-link-text">Work Experience</span>
           </Link>

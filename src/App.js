@@ -8,12 +8,16 @@ import {loadMe} from './actions/auth'
 import DoctorDashboard from './components/doctor/DoctorDashboard'
 import DoctorProfile from './components/doctor/profile/DoctorProfile'
 import EditProfile from './components/doctor/profile/EditProfile'
+import WorkExp from './components/doctor/WorkExp'
 import HospitalDashboard from "./components/hospital/HospitalDashboard";
 import PrivateDrRoute from './components/Router/PrivateDrRoute'
 import PrivateHosRoute from './components/Router/PrivateHosRoute'
 // redux
 import { Provider } from "react-redux";
 import store from "./utils/store";
+import Education from "./components/doctor/Education";
+import Award from "./components/doctor/Award";
+import Training from "./components/doctor/Training";
 if (localStorage.token) {
   setAuthToken(localStorage.token)
 }
@@ -33,6 +37,10 @@ function App() {
             <PrivateDrRoute exact path="/doctor-dashboard" component={DoctorDashboard}/>
             <PrivateDrRoute exact path="/doctor-profile" component={DoctorProfile}/>
             <PrivateDrRoute exact path="/edit-dr-profile" component={EditProfile}/>
+            <PrivateDrRoute exact path="/work-exp" component={WorkExp}/>
+            <PrivateDrRoute exact path="/education" component={Education}/>
+            <PrivateDrRoute exact path="/award" component={Award}/>
+            <PrivateDrRoute exact path="/training" component={Training}/>
             <PrivateHosRoute exact path="/hospital-dashboard" component={HospitalDashboard}/>
           </Switch>
       </Router>

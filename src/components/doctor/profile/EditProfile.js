@@ -22,7 +22,7 @@ const EditProfile = ({ getDrProfile, history, editProfile, auth: { user }, drpro
             lastname: loading || !profile.lastname ? '' : profile.lastname,
             professionaltitle: loading || !profile.professionaltitle ? '' : profile.professionaltitle,
         })
-    }, [getDrProfile,loading])
+    }, [])
     const { specialities, professionaltitle, image, name, lastname } = profileData
     const onChange = e => {
         setProfileData({
