@@ -1,4 +1,4 @@
-import { TOGGLE_DR_AVAILABLE, GET_RANKING, GET_DR_PROFILE, CLEAR_DR_PROFILE, AUTH_ERROR, UPDATE_DR_PROFILE, CREATE_DR_PROFILE, ADD_WORKEXP, DELETE_WORKEXP , ADD_EDUCATION,DELETE_EDUCATION,ADD_AWARD,ADD_TRAINING,DELETE_AWARD,DELETE_TRAINING} from "../types";
+import { TOGGLE_DR_AVAILABLE, GET_RANKING, GET_DR_PROFILE, CLEAR_DR_PROFILE, AUTH_ERROR, UPDATE_DR_PROFILE, CREATE_DR_PROFILE, ADD_WORKEXP, DELETE_WORKEXP, ADD_EDUCATION, DELETE_EDUCATION, ADD_AWARD, ADD_TRAINING, DELETE_AWARD, DELETE_TRAINING, GET_OPD, GET_COMMENTS, REMOVE_COMMENTS} from "../types";
 import axios from "axios";
 import { setAlert } from "../alert";
 const config = {
@@ -8,12 +8,12 @@ const config = {
 };
 const errorHaldler = (err,dispatch) => {
     if (err.response.status === 500) dispatch(setAlert(err.response.statusText, 'danger', 10000))
-    if ((err.response.status === 401) || (err.response.status === 403)) {
+    if (err.response.status === 401 ) {
         dispatch(setAlert(err.response.data.error, "danger", 10000));
         dispatch({ type: AUTH_ERROR })
         dispatch({ type: CLEAR_DR_PROFILE })
     }
-    if(err.response.status === 422) dispatch(setAlert(err.response.data.error,'danger',10000))
+    if ((err.response.status === 422) || (err.response.status === 403) || (err.response.status === 400)) dispatch(setAlert(err.response.data.error,'danger',10000))
 }
 export const getDrProfile = _id => async dispatch => {
     try {
@@ -22,8 +22,8 @@ export const getDrProfile = _id => async dispatch => {
             type: GET_DR_PROFILE,
             payload: res.data
         })
+        
     } catch (err) {
-        // need to handle different error code..everywhere :)
         console.log(err.response, 'get dr profile error');
         errorHaldler(err,dispatch)
     }
@@ -201,4 +201,33 @@ export const deleteAward = (award_id, _id) => async dispatch => {
         console.log(err.response, 'delete award error');
         errorHaldler(err, dispatch)
     }
+}
+export const getOPDs = _id => async dispatch => {
+    try {
+        const res = await axios.get(`/getOPDByDoctor/?d_id=${_id}`)
+        dispatch({
+            type: GET_OPD,
+            payload:res.data
+        })
+    } catch (err) {
+        console.log(err.response, 'get OPDs error');
+        errorHaldler(err, dispatch)
+    }
+}
+export const getComments = (_id,page=1) => async dispatch => {
+    try {
+        const res = await axios.get(`/getReviews/?d_id=${_id}&page=${page}`)
+        dispatch({
+            type: GET_COMMENTS,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err.response, 'get comments error');
+        errorHaldler(err, dispatch)
+    }
+}
+export const removeComments = () => async dispatch=>{
+    dispatch({
+        type: REMOVE_COMMENTS
+    })
 }

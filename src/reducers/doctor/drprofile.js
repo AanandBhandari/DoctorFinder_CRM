@@ -12,13 +12,18 @@ import {
     DELETE_AWARD,
     ADD_AWARD,
     DELETE_TRAINING,
-    ADD_TRAINING
+    ADD_TRAINING,
+    GET_OPD,
+    GET_COMMENTS,
+    REMOVE_COMMENTS
 } from "../../actions/types";
 
 const initalState = {
     profile:null,
     loading: true,
-    ranking:null
+    ranking:null,
+    OPDs:[],
+    comments:[]
 };
 
 export default function (state = initalState, action) {
@@ -48,32 +53,54 @@ export default function (state = initalState, action) {
         case ADD_WORKEXP:
             return {
                 ...state,
-                profile:{...state.profile,workexp:payload}
+                profile:{...state.profile,workexp:payload},
+                loading: false
             }
         case DELETE_EDUCATION:
         case ADD_EDUCATION:
             return {
                 ...state,
-                profile: { ...state.profile, edu: payload }
+                profile: { ...state.profile, edu: payload },
+                loading: false
             }
         case DELETE_AWARD:
         case ADD_AWARD:
             return {
                 ...state,
-                profile: { ...state.profile, awards: payload }
+                profile: { ...state.profile, awards: payload },
+                loading: false
             }
         case DELETE_TRAINING:
         case ADD_TRAINING:
             return {
                 ...state,
-                profile: { ...state.profile, training: payload }
+                profile: { ...state.profile, training: payload },
+                loading: false
+            }
+        case GET_OPD:
+            return{
+                ...state,
+                loading:false,
+                OPDs:payload
+            }
+        case GET_COMMENTS:
+            return{
+                ...state,
+                comments:[...state.comments,...payload]
+            }
+        case REMOVE_COMMENTS:
+            return {
+                ...state,
+                comments: []
             }
         case CLEAR_DR_PROFILE:
             return{
                 ...state,
                 profile:null,
                 ranking: null,
-                loading: false
+                loading: true,
+                OPDs:[],
+                comments:[]
             }
         default:
             return state;

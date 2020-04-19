@@ -4,7 +4,7 @@ import Layout from '../layout/Layout'
 import {connect} from 'react-redux'
 import { getDrProfile, addWorkExp, deleteWorkExp } from '../../actions/doctor/profile'
 
-const WorkExp = ({ addWorkExp, deleteWorkExp ,getDrProfile,profile,auth:{user}}) => {
+const WorkExp = ({ addWorkExp, deleteWorkExp ,getDrProfile,workexp,auth:{user}}) => {
     const [work, setWork] = useState({
         title: '',
         organization: '',
@@ -77,7 +77,7 @@ const WorkExp = ({ addWorkExp, deleteWorkExp ,getDrProfile,profile,auth:{user}})
                     </tr>
                 </thead>
                 <tbody>
-                {profile && !profile.loading && profile.workexp.map((w,i)=> (
+                {workexp && workexp.map((w,i)=> (
                     <tr key={w._id}>
                         <th scope="row">{i+1}</th>
                         <td>
@@ -88,7 +88,6 @@ const WorkExp = ({ addWorkExp, deleteWorkExp ,getDrProfile,profile,auth:{user}})
                         </td>
                     </tr>
                 ))}
-
                 </tbody>
             </table>
 
@@ -98,14 +97,14 @@ const WorkExp = ({ addWorkExp, deleteWorkExp ,getDrProfile,profile,auth:{user}})
 
 WorkExp.propTypes = {
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object,
+    workexp: PropTypes.array.isRequired,
     getDrProfile: PropTypes.func.isRequired,
     addWorkExp: PropTypes.func.isRequired,
     deleteWorkExp: PropTypes.func.isRequired,
     }
 const mapStateToProps = state => ({
     auth: state.auth,
-    profile: state.drprofile.profile
+    workexp: state.drprofile.profile?.workexp
 });
 
 export default connect(mapStateToProps, { getDrProfile, addWorkExp, deleteWorkExp})(WorkExp)

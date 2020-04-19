@@ -44,24 +44,22 @@ const DrBar = ({logout}) => {
         </li>
         <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Your Awards">
           <Link className="nav-link" to="/award">
-            <i className="fa fa-fw fa-gift"></i>
+            <i className="fa fa-fw fa-trophy"></i>
             <span className="nav-link-text">Awards</span>
           </Link>
         </li>
-        {/* <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a className="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i className="fa fa-fw fa-wrench"></i>
-            <span className="nav-link-text">Components</span>
-          </a>
-          <ul className="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <Link to="/navbar.html">Navbar</Link>
-            </li>
-            <li>
-              <Link to="/cards.html">Cards</Link>
-            </li>
-          </ul>
-        </li> */}
+        <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Your Awards">
+          <Link className="nav-link" to="/opds">
+                <i className="fa fa-fw fa-briefcase"></i>
+            <span className="nav-link-text">My OPDs</span>
+          </Link>
+        </li>
+        <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Your Awards">
+          <Link className="nav-link" to="/comments">
+                <i className="fa fa-fw fa-comments"></i>
+            <span className="nav-link-text">Comments</span>
+          </Link>
+        </li>
       </ul>
       <ul className="navbar-nav sidenav-toggler">
         <li className="nav-item">

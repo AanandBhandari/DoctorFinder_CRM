@@ -4,7 +4,7 @@ import Layout from '../layout/Layout'
 import {connect} from 'react-redux'
 import { getDrProfile, addAward, deleteAward } from '../../actions/doctor/profile'
 
-const Award = ({ addAward, deleteAward ,getDrProfile,profile,auth:{user}}) => {
+const Award = ({ addAward, deleteAward ,getDrProfile,awards,auth:{user}}) => {
     const [award, setWork] = useState({
         title: '',
         address: '',
@@ -70,7 +70,7 @@ const Award = ({ addAward, deleteAward ,getDrProfile,profile,auth:{user}}) => {
                     </tr>
                 </thead>
                 <tbody>
-                {profile && !profile.loading && profile.awards.map((w,i)=> (
+                    {awards && awards.map((w,i)=> (
                     <tr key={w._id}>
                         <th scope="row">{i+1}</th>
                         <td>
@@ -91,14 +91,14 @@ const Award = ({ addAward, deleteAward ,getDrProfile,profile,auth:{user}}) => {
 
 Award.propTypes = {
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object,
+    awards: PropTypes.array.isRequired,
     getDrProfile: PropTypes.func.isRequired,
     addAward: PropTypes.func.isRequired,
     deleteAward: PropTypes.func.isRequired,
     }
 const mapStateToProps = state => ({
     auth: state.auth,
-    profile: state.drprofile.profile
+    awards: state.drprofile.profile?.awards
 });
 
 export default connect(mapStateToProps, { getDrProfile, addAward, deleteAward})(Award)

@@ -4,7 +4,7 @@ import Layout from '../layout/Layout'
 import {connect} from 'react-redux'
 import { getDrProfile, addEducation, deleteEducation } from '../../actions/doctor/profile'
 
-const Education = ({ addEducation, deleteEducation ,getDrProfile,profile,auth:{user}}) => {
+const Education = ({ addEducation, deleteEducation, getDrProfile, educations,auth:{user}}) => {
     const [edu, setEdu] = useState({
         title: '',
         institutename: '',
@@ -77,7 +77,7 @@ const Education = ({ addEducation, deleteEducation ,getDrProfile,profile,auth:{u
                     </tr>
                 </thead>
                 <tbody>
-                {profile && !profile.loading && profile.edu.map((w,i)=> (
+                    {educations && educations.map((w,i)=> (
                     <tr key={w._id}>
                         <th scope="row">{i+1}</th>
                         <td>
@@ -98,14 +98,14 @@ const Education = ({ addEducation, deleteEducation ,getDrProfile,profile,auth:{u
 
 Education.propTypes = {
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object,
+    educations: PropTypes.array.isRequired,
     getDrProfile: PropTypes.func.isRequired,
     addEducation: PropTypes.func.isRequired,
     deleteEducation: PropTypes.func.isRequired,
     }
 const mapStateToProps = state => ({
     auth: state.auth,
-    profile: state.drprofile.profile
+    educations: state.drprofile.profile?.edu
 });
 
 export default connect(mapStateToProps, { getDrProfile, addEducation, deleteEducation})(Education)

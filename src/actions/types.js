@@ -19,3 +19,6 @@ export const ADD_TRAINING = "ADD_TRAINING";
 export const DELETE_TRAINING = "DELETE_TRAINING";
 export const ADD_AWARD = "ADD_AWARD";
 export const DELETE_AWARD = "DELETE_AWARD";
+export const GET_OPD = "GET_OPD";
+export const GET_COMMENTS = "GET_COMMENTS";
+export const REMOVE_COMMENTS = "REMOVE_COMMENTS";

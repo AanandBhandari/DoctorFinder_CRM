@@ -12,12 +12,13 @@ import WorkExp from './components/doctor/WorkExp'
 import HospitalDashboard from "./components/hospital/HospitalDashboard";
 import PrivateDrRoute from './components/Router/PrivateDrRoute'
 import PrivateHosRoute from './components/Router/PrivateHosRoute'
-// redux
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Education from "./components/doctor/Education";
 import Award from "./components/doctor/Award";
 import Training from "./components/doctor/Training";
+import OPDs from "./components/doctor/OPDs";
+import Comment from "./components/doctor/Comment";
 if (localStorage.token) {
   setAuthToken(localStorage.token)
 }
@@ -41,6 +42,8 @@ function App() {
             <PrivateDrRoute exact path="/education" component={Education}/>
             <PrivateDrRoute exact path="/award" component={Award}/>
             <PrivateDrRoute exact path="/training" component={Training}/>
+            <PrivateDrRoute exact path="/opds" component={OPDs}/>
+            <PrivateDrRoute exact path="/comments" component={Comment}/>
             <PrivateHosRoute exact path="/hospital-dashboard" component={HospitalDashboard}/>
           </Switch>
       </Router>
