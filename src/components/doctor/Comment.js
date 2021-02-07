@@ -10,7 +10,7 @@ const Comment = ({ getComments,removeComments ,auth: { user }, comments }) => {
         console.log('hello');
         user && getComments(user._id)
         return ()=>removeComments()
-    }, [user, getComments])
+    }, [user, getComments,removeComments])
     
     const loadmore = id=>{
         setPage(page+1)
@@ -25,7 +25,7 @@ const Comment = ({ getComments,removeComments ,auth: { user }, comments }) => {
                 <div className="list-group list-group-flush">
                     {
                         comments && comments.map(c => (
-                            <a className="list-group-item list-group-item-action" href="#" key={c._id}>
+                            <a className="list-group-item list-group-item-action" href="!#" key={c._id}>
                                 <div className="media">
                                     <img className="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="" />
                                     <div className="media-body">
@@ -38,7 +38,7 @@ const Comment = ({ getComments,removeComments ,auth: { user }, comments }) => {
                         ))
                     }
                     {
-                        comments && comments.length > 10 && <a className="list-group-item list-group-item-action" href="#" onClick={()=>{loadmore(user._id)}}>View more comments...</a>
+                        comments && comments.length > 10 && <a className="list-group-item list-group-item-action" href="!#" onClick={()=>{loadmore(user._id)}}>View more comments...</a>
                     }
                     
                 </div>

@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import HosBar from "./navbar/HosBar";
 import DrBar from "./navbar/DrBar";
 import Footer from "./Footer";
+import {connect} from 'react-redux'
 
 const Layout = ({ children, type }) => {
     return (
@@ -16,4 +17,7 @@ const Layout = ({ children, type }) => {
         </Fragment>
     );
 };
-export default Layout;
+const mapStateToProps=state=>({
+    type:state.auth.type
+})
+export default connect(mapStateToProps)(Layout);

@@ -70,7 +70,7 @@ const DrBar = ({logout}) => {
       </ul>
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link onClick={logout} className="nav-link" to='#!'>
+          <Link onClick={()=>logout('doctor')} className="nav-link" to='#!'>
             <i className="fa fa-fw fa-sign-out"></i>Logout</Link>
         </li>
       </ul>

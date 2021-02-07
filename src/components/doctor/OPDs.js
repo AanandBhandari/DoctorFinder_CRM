@@ -12,7 +12,7 @@ const OPDs = ({ OPDs, getOPDs, auth: { user }}) => {
     const getTime = num => {
         if(num<12) return `${num} am`
         if(num>12) return `${num-12} pm`
-        if (num == 12) return `${num} pm`
+        if (num === 12) return `${num} pm`
     }
     return (
         <Layout>

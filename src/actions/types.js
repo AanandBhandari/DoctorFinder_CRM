@@ -1,10 +1,13 @@
+// alert
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
+// auth
 export const DECODED_MYSELF = "DECODED_MYSELF"
 export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
+// doctor
 export const TOGGLE_DR_AVAILABLE = "TOGGLE_DR_AVAILABLE";
 export const GET_RANKING = "GET_RANKING";
 export const GET_DR_PROFILE = "GET_DR_PROFILE";
@@ -22,3 +25,8 @@ export const DELETE_AWARD = "DELETE_AWARD";
 export const GET_OPD = "GET_OPD";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const REMOVE_COMMENTS = "REMOVE_COMMENTS";
+// hospital
+export const GET_HOS_PROFILE = "GET_HOS_PROFILE";
+export const CLEAR_HOS_PROFILE = "CLEAR_HOS_PROFILE";
+export const CREATE_HOS_PROFILE = "CREATE_HOS_PROFILE";
+export const UPDATE_HOS_PROFILE = "UPDATE_HOS_PROFILE";

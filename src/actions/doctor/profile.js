@@ -1,11 +1,21 @@
 import { TOGGLE_DR_AVAILABLE, GET_RANKING, GET_DR_PROFILE, CLEAR_DR_PROFILE, AUTH_ERROR, UPDATE_DR_PROFILE, CREATE_DR_PROFILE, ADD_WORKEXP, DELETE_WORKEXP, ADD_EDUCATION, DELETE_EDUCATION, ADD_AWARD, ADD_TRAINING, DELETE_AWARD, DELETE_TRAINING, GET_OPD, GET_COMMENTS, REMOVE_COMMENTS} from "../types";
 import axios from "axios";
 import { setAlert } from "../alert";
+import { SERVER_ROUTE } from "../../utils/config";
 const config = {
     headers: {
+        baseURL: `${SERVER_ROUTE}`,
         "Content-Type": "application/json"
     }
 };
+const api = axios.create({
+    baseURL: `${SERVER_ROUTE}`,
+    headers: {
+
+        "Content-Type": "application/json",
+    },
+    // withCredentials: true// should be only post req
+});
 const errorHaldler = (err,dispatch) => {
     if (err.response.status === 500) dispatch(setAlert(err.response.statusText, 'danger', 10000))
     if (err.response.status === 401 ) {
@@ -17,7 +27,7 @@ const errorHaldler = (err,dispatch) => {
 }
 export const getDrProfile = _id => async dispatch => {
     try {
-        const res = await axios.get(`/doctor/profile/${_id}`);
+        const res = await api.get(`/doctor/profile/${_id}`);
         dispatch({
             type: GET_DR_PROFILE,
             payload: res.data
@@ -32,7 +42,7 @@ export const getDrProfile = _id => async dispatch => {
 // toggle doctor available
 export const toggleAvailability = _id => async dispatch => {
     try {
-        const res = await axios.patch(`/doctor/profile/${_id}`);
+        const res = await api.patch(`/doctor/profile/${_id}`);
         dispatch({
             type: TOGGLE_DR_AVAILABLE,
             payload: res.data
@@ -45,7 +55,7 @@ export const toggleAvailability = _id => async dispatch => {
 
 export const averageRanking = _id => async dispatch => {
     try {
-        const res = await axios.get(`/getAverageRating/?d_id=${_id}`)
+        const res = await api.get(`/getAverageRating/?d_id=${_id}`)
         res.data.averageStar === null ?
             res.data.averageStar = 0 : res.data.averageStar = Number.parseFloat(res.data.averageStar).toFixed(2);
         dispatch({
@@ -61,7 +71,7 @@ export const averageRanking = _id => async dispatch => {
 
 export const createProfile = formData => async dispatch => {
     try {
-        const res = await axios.put('/doctor/profile', formData , {headers: {
+        const res = await api.put('/doctor/profile', formData , {headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         }})
         dispatch({
@@ -77,7 +87,7 @@ export const createProfile = formData => async dispatch => {
 
 export const editProfile = (formData,_id, history) => async dispatch => {
     try {
-        const res = await axios.put(`/doctor/profile/${_id}`, formData, {
+        const res = await api.put(`/doctor/profile/${_id}`, formData, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
@@ -97,7 +107,7 @@ export const editProfile = (formData,_id, history) => async dispatch => {
 export const addWorkExp = (workExp, _id) => async dispatch=> {
     try {
         const body = JSON.stringify(workExp)
-        const res = await axios.put(`/doctor/workexp/${_id}`,body,config)
+        const res = await api.put(`/doctor/workexp/${_id}`,body,config)
         dispatch({
             type:ADD_WORKEXP,
             payload: res.data.workexp
@@ -110,7 +120,7 @@ export const addWorkExp = (workExp, _id) => async dispatch=> {
 }
 export const deleteWorkExp = (we_id, _id) => async dispatch => {
     try {
-        const res = await axios.delete(`/doctor/workexp/${_id}?we_id=${we_id}`)
+        const res = await api.delete(`/doctor/workexp/${_id}?we_id=${we_id}`)
         dispatch({
             type:DELETE_WORKEXP,
             payload: res.data.workexp
@@ -124,7 +134,7 @@ export const deleteWorkExp = (we_id, _id) => async dispatch => {
 export const addEducation = (edu, _id) => async dispatch => {
     try {
         const body = JSON.stringify(edu)
-        const res = await axios.put(`/doctor/edu/${_id}`, body, config)
+        const res = await api.put(`/doctor/edu/${_id}`, body, config)
         dispatch({
             type: ADD_EDUCATION,
             payload: res.data.edu
@@ -137,7 +147,7 @@ export const addEducation = (edu, _id) => async dispatch => {
 }
 export const deleteEducation = (edu_id, _id) => async dispatch => {
     try {
-        const res = await axios.delete(`/doctor/edu/${_id}?we_id=${edu_id}`)
+        const res = await api.delete(`/doctor/edu/${_id}?we_id=${edu_id}`)
         dispatch({
             type: DELETE_EDUCATION,
             payload: res.data.edu
@@ -151,7 +161,7 @@ export const deleteEducation = (edu_id, _id) => async dispatch => {
 export const addTraining = (training, _id) => async dispatch => {
     try {
         const body = JSON.stringify(training)
-        const res = await axios.put(`/doctor/training/${_id}`, body, config)
+        const res = await api.put(`/doctor/training/${_id}`, body, config)
         dispatch({
             type: ADD_TRAINING,
             payload: res.data.training
@@ -164,7 +174,7 @@ export const addTraining = (training, _id) => async dispatch => {
 }
 export const deleteTraining = (train_id, _id) => async dispatch => {
     try {
-        const res = await axios.delete(`/doctor/training/${_id}?we_id=${train_id}`)
+        const res = await api.delete(`/doctor/training/${_id}?we_id=${train_id}`)
         dispatch({
             type: DELETE_TRAINING,
             payload: res.data.training
@@ -178,7 +188,7 @@ export const deleteTraining = (train_id, _id) => async dispatch => {
 export const addAward = (award, _id) => async dispatch => {
     try {
         const body = JSON.stringify(award)
-        const res = await axios.put(`/doctor/award/${_id}`, body, config)
+        const res = await api.put(`/doctor/award/${_id}`, body, config)
         dispatch({
             type: ADD_AWARD,
             payload: res.data.awards
@@ -191,7 +201,7 @@ export const addAward = (award, _id) => async dispatch => {
 }
 export const deleteAward = (award_id, _id) => async dispatch => {
     try {
-        const res = await axios.delete(`/doctor/award/${_id}?we_id=${award_id}`)
+        const res = await api.delete(`/doctor/award/${_id}?we_id=${award_id}`)
         dispatch({
             type: DELETE_AWARD,
             payload: res.data.awards
@@ -204,7 +214,7 @@ export const deleteAward = (award_id, _id) => async dispatch => {
 }
 export const getOPDs = _id => async dispatch => {
     try {
-        const res = await axios.get(`/getOPDByDoctor/?d_id=${_id}`)
+        const res = await api.get(`/getOPDByDoctor/?d_id=${_id}`)
         dispatch({
             type: GET_OPD,
             payload:res.data
@@ -216,7 +226,7 @@ export const getOPDs = _id => async dispatch => {
 }
 export const getComments = (_id,page=1) => async dispatch => {
     try {
-        const res = await axios.get(`/getReviews/?d_id=${_id}&page=${page}`)
+        const res = await api.get(`/getReviews/?d_id=${_id}&page=${page}`)
         dispatch({
             type: GET_COMMENTS,
             payload: res.data

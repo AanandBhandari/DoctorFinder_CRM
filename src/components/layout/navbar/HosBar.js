@@ -45,18 +45,24 @@ const HosBar = ({logout}) => {
                                 <span className="nav-link-text">Appointments</span>
                             </Link>
                         </li>
+                    <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                        <Link className="nav-link" to="/map">
+                            <i className="fa fa-fw fa-area-chart"></i>
+                            <span className="nav-link-text">Map</span>
+                        </Link>
+                    </li>
 
                     </ul>
                     <ul className="navbar-nav sidenav-toggler">
                         <li className="nav-item">
-                            <Link className="nav-link text-center" id="sidenavToggler">
+                            <a href="!#" className="nav-link text-center" id="sidenavToggler">
                                 <i className="fa fa-fw fa-angle-left"></i>
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link onClick={logout} className="nav-link" to='#!'>
+                            <Link onClick={()=>logout('hospital')} className="nav-link" to='#!'>
                                 <i className="fa fa-fw fa-sign-out"></i>Logout</Link>
                         </li>
                     </ul>
